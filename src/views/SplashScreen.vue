@@ -1,6 +1,10 @@
 <template>
-  <div class="splash-page">
-    <img src="../assets/image/logo.png" alt="logo arka chat">
+  <div>
+    <router-link to="/login">
+    <div class="splash-page">
+      <img src="../assets/image/logo.png" alt="logo arka chat">
+    </div>
+    </router-link>
   </div>
 </template>
 
