@@ -9,13 +9,13 @@
           <b-col cols="8"><h4 class="text-center m-2"> Register</h4></b-col>
         </b-row>
         <p class="small mt-2">Let's create your account</p>
-        <form>
+        <form @submit.prevent="register">
           <label class="small text-muted">Name</label>
-          <input type="text" class="form-control mb-3" autofocus required />
+          <input type="text" class="form-control mb-3" autofocus required v-model="registerName" />
           <label class="small text-muted">Email</label>
-          <input type="email" class="form-control mb-3" required />
+          <input type="email" class="form-control mb-3" required v-model="registerEmail" />
           <label class="small text-muted">Password</label>
-          <input type="password" class="form-control" required />
+          <input type="password" class="form-control" required v-model="registerPass" />
           <button type="submit" class="btn btn-violet btn-block mt-4">Register</button>
           <p class="text-muted text-center m-3">Register with</p>
         </form>
@@ -28,8 +28,48 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'Register'
+  name: 'Register',
+  data () {
+    return {
+      registerName: '',
+      registerEmail: '',
+      registerPass: ''
+    }
+  },
+  methods: {
+    ...mapActions({
+      onRegister: 'auth/onRegister'
+    }),
+    register () {
+      const data = {
+        name: this.registerName,
+        email: this.registerEmail,
+        password: this.registerPass
+      }
+      this.onRegister(data).then(result => {
+        this.alertActivate()
+        window.location = '/login'
+      }).catch(err => this.alertError(err))
+    },
+    alertActivate () {
+      Swal.fire(
+        'Your Registration Success',
+        'Please Check Your Email to activate',
+        'success'
+      )
+    },
+    alertError () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!'
+      })
+    }
+  }
 }
 </script>
 

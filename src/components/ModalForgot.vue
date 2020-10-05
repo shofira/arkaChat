@@ -10,8 +10,8 @@
               <br />
               You'll get message soon to create a new password
             </p>
-            <form class="text-center container" >
-              <input type="email" class="form-control" placeholder="Email" autofocus required />
+            <form class="text-center container" @submit.prevent="forgotPassword">
+              <input type="email" class="form-control" placeholder="Email" autofocus required v-model="forgotEmail" />
               <button type="submit" class="btn btn-block btn-violet mt-4">Send</button>
             </form>
           </div>
@@ -22,8 +22,44 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+import { mapActions } from 'vuex'
+
 export default {
-  name: 'ModalForgot'
+  name: 'ModalForgot',
+  data () {
+    return {
+      forgotEmail: null
+    }
+  },
+  methods: {
+    ...mapActions({
+      onForgotPassword: 'auth/onForgotPassword'
+    }),
+    forgotPassword () {
+      const data = {
+        email: this.forgotEmail
+      }
+      this.onForgotPassword(data).then(result => {
+        this.alertActivate(result)
+        location.reload()
+      }).catch(err => this.alertError(err.message))
+    },
+    alertActivate () {
+      Swal.fire(
+        'Check your email',
+        'Please Check Your Email to reset password',
+        'success'
+      )
+    },
+    alertError () {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Send Email Failed!'
+      })
+    }
+  }
 }
 </script>
 
