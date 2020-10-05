@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import ForgotPassword from '../views/ForgotPassword.vue'
 import Home from '../views/Home.vue'
+import UserProfile from '../views/UserProfile.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -33,8 +34,14 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home,
-    meta: { requiresAuth: true }
+    component: Home
+    // meta: { requiresAuth: true }
+  },
+  {
+    path: '/profile',
+    name: 'UserProfile',
+    component: UserProfile
+    // meta: { requiresAuth: true }
   }
 ]
 

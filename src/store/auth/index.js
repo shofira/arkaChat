@@ -37,7 +37,6 @@ const actions = {
           password: payload.loginPass
         })
         .then(result => {
-          console.log(result)
           localStorage.setItem('id', result.data.data.id)
           localStorage.setItem('token', result.data.data.token)
           localStorage.setItem('refreshToken', result.data.data.refreshToken)
@@ -53,7 +52,6 @@ const actions = {
       axios
         .post(`${url}/users/logout/${payload}`)
         .then(result => {
-          console.log(result)
           localStorage.removeItem('id')
           localStorage.removeItem('token')
           localStorage.removeItem('refreshToken')

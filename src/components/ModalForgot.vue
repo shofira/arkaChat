@@ -4,7 +4,10 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-body">
-            <h4 class="text-center mb-5"> ArkaChat </h4>
+            <h4 class="text-center mb-5">
+              <img src="../assets/image/logoBlue.png" alt="logo arkachat">
+              ArkaChat
+            </h4>
             <p class="small text-muted text-center mt-2">
               Forgot your password? Please, enter your email here!
               <br />
