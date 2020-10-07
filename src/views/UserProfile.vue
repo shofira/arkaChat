@@ -1,28 +1,27 @@
 <template>
   <div class="user-page">
-    <b-row>
-      <b-col class="col-sm-4 card-user">
-        <b-row class="m-3">
-          <b-col cols="2"><router-link to="/home">
-          <img src="../assets/image/back.png" class="mt-2">
-          </router-link></b-col>
-          <b-col cols="8">
-            <h5 class="text-center text-violet"> @{{ detailUser.username }} </h5>
-          </b-col>
-        </b-row>
-        <form enctype="multipart/form-data" @change.prevent="update">
-          <div class="text-center">
-            <img :src="`http://3.83.166.46:3000/${detailUser.image}`" alt="photo profile" class="profile-image">
-            <h5 class="font-weight-bold mt-3">{{ detailUser.name }}</h5>
-            <p class="text-muted">@{{ detailUser.username }}</p>
-            <label class="custom-file-upload">
-              <input type="file" @change="upload($event)"/>
-              Select Photo
-            </label>
-          </div>
-        </form>
+    <div class="container">
+      <b-row class="m-3">
+        <b-col cols="2"><router-link to="/home">
+        <img src="../assets/image/back.png" class="mt-2">
+        </router-link></b-col>
+        <b-col cols="8">
+          <h5 class="text-center text-violet"> @{{ detailUser.username }} </h5>
+        </b-col>
+      </b-row>
+      <form enctype="multipart/form-data" @change.prevent="update">
+        <div class="text-center">
+          <label class="custom-file-upload">
+            <input type="file" @change="upload($event)"/>
+            <img :src="`http://localhost:3000/${detailUser.image}`" alt="photo profile" class="profile-image">
+          </label>
+          <h5 class="font-weight-bold mt-3">{{ detailUser.name }}</h5>
+          <p class="text-muted">@{{ detailUser.username }}</p>
+        </div>
+      </form>
 
-        <div class="ml-4 mr-3">
+      <div class="row">
+        <div class="account-setting col-sm-4">
           <b>Account</b>
           <p class="small text-violet setting" data-toggle="modal" data-target="#modalUpdate">
             tap to change
@@ -36,6 +35,8 @@
           <hr>
           <b class="small">{{ detailUser.bio }}</b>
           <p class="small text-muted">Bio</p>
+        </div>
+        <div class="col-sm-5">
           <b>Settings</b>
           <p class="setting"> <b-icon-bell class="mr-2"></b-icon-bell> Notification and Sounds</p>
           <p class="setting"> <b-icon-lock class="mr-2"></b-icon-lock> Private and Security</p>
@@ -43,9 +44,8 @@
           <p class="setting"> <b-icon-chat-square-text class="mr-2"></b-icon-chat-square-text> Chat Setting</p>
           <p class="setting"> <b-icon-laptop class="mr-2"></b-icon-laptop> Devices</p>
         </div>
-      </b-col>
-      <b-col class=" d-none d-sm-block bg-info">adsf</b-col>
-    </b-row>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -104,7 +104,7 @@ export default {
       Swal.fire({
         icon: 'error',
         title: 'Image size is too big!',
-        text: 'Please upload another one with size < 5mb'
+        text: 'Please upload another one with size < 2mb'
       })
     },
     alertValidation () {
@@ -130,40 +130,44 @@ export default {
 
 <style scoped>
 .user-page {
-  overflow: hidden;
+  background-color: #fff;
 }
-.card-user {
-  height: 100%;
+.chat-right {
+  margin: auto;
 }
 .text-violet {
   color:  #7E98DF;
 }
 .profile-image {
-  width: 20%;
+  width: 15%;
   height: 5%;
   border-radius: 30px;
 }
 input[type="file"] {
   display: none;
-  border-radius: 10px;
-  font-weight: bold;
-  padding: 8px;
-  margin: 20px auto;
 }
 .custom-file-upload {
-  border: 1px solid #ccc;
   display: inline-block;
-  padding: 6px 12px;
   cursor: pointer;
   background-color: #FFFFFF;
-  border: 1px solid #7E98DF;
-  box-sizing: border-box;
-  border-radius: 10px;
-  color: #7E98DF;
-  margin-bottom: 15px;
+  border: none;
+  margin-bottom: 5px;
 }
 .setting {
   cursor: pointer;
-  margin: 15px 0;
+  margin: 20px 0;
+}
+.account-setting {
+  margin-left: 20%;
+}
+@media(max-width: 768px) {
+  .account-setting {
+    margin-left: 10%;
+  }
+}
+@media(max-width: 576px) {
+  .account-setting {
+    margin-left: 0;
+  }
 }
 </style>

@@ -49,20 +49,22 @@ export default {
     }),
     login () {
       this.onLogin(this.form).then(result => {
-        console.log(result)
         if (result === "Cannot read property 'password' of undefined") {
           this.alertExist()
           localStorage.removeItem('id')
+          localStorage.removeItem('username')
           localStorage.removeItem('token')
           localStorage.removeItem('refreshToken')
         } else if (result === 'Need Activation') {
           this.alertActivate()
           localStorage.removeItem('id')
+          localStorage.removeItem('username')
           localStorage.removeItem('token')
           localStorage.removeItem('refreshToken')
         } else if (result === 'Incorrect password! Please try again') {
           this.alertMatch()
           localStorage.removeItem('id')
+          localStorage.removeItem('username')
           localStorage.removeItem('token')
           localStorage.removeItem('refreshToken')
         } else {

@@ -37,7 +37,9 @@ const actions = {
           password: payload.loginPass
         })
         .then(result => {
+          console.log(result)
           localStorage.setItem('id', result.data.data.id)
+          localStorage.setItem('username', result.data.data.username)
           localStorage.setItem('token', result.data.data.token)
           localStorage.setItem('refreshToken', result.data.data.refreshToken)
           resolve(result.data.message)
@@ -53,8 +55,10 @@ const actions = {
         .post(`${url}/users/logout/${payload}`)
         .then(result => {
           localStorage.removeItem('id')
+          localStorage.removeItem('username')
           localStorage.removeItem('token')
           localStorage.removeItem('refreshToken')
+          localStorage.removeItem('receiver')
           resolve(result)
         })
         .catch(err => {
